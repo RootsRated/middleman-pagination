@@ -40,9 +40,11 @@ Inside your `config.rb`:
 
 ```ruby
 activate :pagination do
-  pageable_resource :recipes do |page|
+  pageable_resource :recipes do |pages|
     # Match any page that lives in the "recipes" directory
-    page.path.start_with?('recipes/')
+    filtered_pages = pages.select { |page| page.path.start_with?('recipes/') }
+    # And sort by path
+    filtered_pages.sort_by(&:path)
   end
 end
 ```
