@@ -14,10 +14,7 @@ module Middleman
 
       def pageable_resource(name, &block)
         @pageable[name] = Pageable.new(name) do
-          resources.select do |resource|
-            next if resource.ignored?
-            block.call(resource)
-          end.sort_by(&:path)
+          block.call(resources.reject(&:ignored?))
         end
       end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Simple pagination", :feature do
-  it "activates without any issues" do   
+  it "activates without any issues" do
     expect {
       run_site('recipes') { activate :pagination }
     }.not_to raise_error
@@ -10,8 +10,8 @@ describe "Simple pagination", :feature do
   it "produces pages for a set of resources" do
     run_site 'recipes' do
       activate :pagination do
-        pageable_resource :recipes do |resource|
-          resource.path.start_with?('recipes')
+        pageable_resource :recipes do |resources|
+          resources.select { |resource| resource.path.start_with?('recipes') }
         end
       end
     end
@@ -53,8 +53,8 @@ describe "Pagination with directory indexes", :feature do
   it "produces pages for a set of resources" do
     run_site 'recipes' do
       activate :pagination do
-        pageable_resource :recipes do |resource|
-          resource.path.start_with?('recipes')
+        pageable_resource :recipes do |resources|
+          resources.select { |resource| resource.path.start_with?('recipes') }
         end
       end
 
@@ -85,8 +85,8 @@ describe "Pagination with indexes not named index", :feature do
   it "produces pages for a set of resources" do
     run_site 'recipes' do
       activate :pagination do
-        pageable_resource :recipes do |resource|
-          resource.path.start_with?('recipes')
+        pageable_resource :recipes do |resources|
+          resources.select { |resource| resource.path.start_with?('recipes') }
         end
       end
     end
@@ -111,8 +111,8 @@ describe "Pagination with proxied resources and ignored proxy resource template"
       end
 
       activate :pagination do
-        pageable_resource :minerals do |resource|
-          resource.path.start_with?('mineral')
+        pageable_resource :minerals do |resources|
+          resources.select { |resource| resource.path.start_with?('mineral') }
         end
       end
     end
@@ -143,8 +143,8 @@ describe "Pagination with proxied resources and ignored proxy index", :feature d
       proxy '/alternative/index.html', '/index.html', ignore: true
 
       activate :pagination do
-        pageable_resource :minerals do |resource|
-          resource.path.start_with?('mineral')
+        pageable_resource :minerals do |resources|
+          resources.select { |resource| resource.path.start_with?('mineral') }
         end
       end
     end
@@ -180,8 +180,8 @@ describe "Pagination with proxied resources and two indexes (one proxied)", :fea
       proxy '/alternative/index.html', '/index.html'
 
       activate :pagination do
-        pageable_resource :minerals do |resource|
-          resource.path.start_with?('mineral')
+        pageable_resource :minerals do |resources|
+          resources.select { |resource| resource.path.start_with?('mineral') }
         end
       end
     end

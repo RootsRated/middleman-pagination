@@ -23,7 +23,7 @@ module Middleman::Pagination
       context "with a pageable configuration and an pagination index" do
         let(:configuration) {
           config = Configuration.new
-          config.pageable_resource(:recipes, &:is_recipe?)
+          config.pageable_resource(:recipes) { |resources| resources.select(&:is_recipe?) }
           config
         }
 
