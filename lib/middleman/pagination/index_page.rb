@@ -2,15 +2,16 @@ module Middleman
   module Pagination
     class IndexPage
 
-      attr_reader :extension_context, :first_index, :pageable_context, :page_num, :symbolic_replacement_path, :index_locals
+      attr_reader :extension_context, :first_index, :pageable_context, :page_num, :symbolic_replacement_path, :index_locals, :index_options
 
-      def initialize(extension_context, first_index, pageable_context, page_num, symbolic_replacement_path, index_locals)
+      def initialize(extension_context, first_index, pageable_context, page_num, symbolic_replacement_path, index_locals, index_options)
         @extension_context = extension_context
         @first_index = first_index
         @pageable_context = pageable_context
         @page_num = page_num
         @symbolic_replacement_path = symbolic_replacement_path
         @index_locals = index_locals
+        @index_options = index_options
       end
 
       def resource
@@ -34,7 +35,7 @@ module Middleman
       end
 
       def metadata
-        { locals: locals }
+        { locals: locals, options: index_options }
       end
 
       def locals

@@ -48,7 +48,8 @@ module Middleman
                                     pageable_context,
                                     page_num,
                                     symbolic_replacement_path,
-                                    index.metadata[:locals]).resource
+                                    index.metadata[:locals],
+                                    index.metadata[:options]).resource
 
           pageable_context.index_resources << new_index
 
@@ -58,7 +59,7 @@ module Middleman
 
       def add_pagination_to(resource, attributes = {})
         in_page_context = InPageContext.new(attributes)
-        resource.add_metadata(locals: { 'pagination_context' => in_page_context })
+        resource.add_metadata(locals: { :pagination_context => in_page_context })
       end
       
       def pagination_data(resource, key)
