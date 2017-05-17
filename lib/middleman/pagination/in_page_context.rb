@@ -10,6 +10,7 @@ module Middleman
                                         :per_page,
                                         :first_page,
                                         :last_page
+                                        :get_page
 
       def next_page
         index_resources[page_num]
@@ -26,6 +27,10 @@ module Middleman
 
       def each(&block)
         subset.each(&block)
+      end
+
+      def get_page(num)
+        index_resources[num]
       end
     end
   end
